@@ -2,6 +2,7 @@ package com.eikichis.houndjobapi.services.Impl;
 
 
 import com.eikichis.houndjobapi.dto.Job;
+import com.eikichis.houndjobapi.dto.Portal;
 import com.eikichis.houndjobapi.services.TrabajandoService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,11 +17,14 @@ import java.util.List;
 @Service
 public class TrabajandoServiceImpl implements TrabajandoService {
 
-    private static final String BASE_URL = "https://cl.computrabajo.com/";
+    private static final String COMPUTRABAJO = "https://cl.computrabajo.com/trabajo-de-";
+
+    private static final String LABORUM = "https://www.laborum.cl/empleos-busqueda-";
     @Override
-    public List<Job> scrapeJobs(String searchQuery) throws IOException {
+    public List<Job> scrapeJobs(Portal portal) throws IOException {
         // Construir la URL de búsqueda
-        String searchUrl = BASE_URL  + searchQuery;
+
+        String searchUrl = portal.getUrl()  + portal.getQuery();
 
         // Conectar y obtener el documento HTML
         Document document = Jsoup.connect(searchUrl)
