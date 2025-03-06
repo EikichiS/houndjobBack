@@ -107,7 +107,7 @@ public class GetonboardServiceImpl implements GetonboardService {
 
             String URL = UriComponentsBuilder
                     .fromHttpUrl(baseUrl)
-                    .queryParam("category", query) // Remotive usa "search" en lugar de "category" para búsquedas generales
+                    .queryParam("search", query) // Remotive usa "search" en lugar de "category" para búsquedas generales
                     .encode(StandardCharsets.UTF_8)
                     .toUriString();
 
