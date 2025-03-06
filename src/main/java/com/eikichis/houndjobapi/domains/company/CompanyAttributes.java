@@ -1,5 +1,6 @@
 package com.eikichis.houndjobapi.domains.company;
 
+import com.eikichis.houndjobapi.domains.ResponseTimeInDays;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
