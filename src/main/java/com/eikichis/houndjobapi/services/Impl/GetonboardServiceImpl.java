@@ -36,7 +36,7 @@ public class GetonboardServiceImpl implements GetonboardService {
     public List<JobDTO> getOferts(String query) throws ApiException {
         List<JobDTO> jobPostingDTOs = new ArrayList<>();
         jobPostingDTOs.addAll(getOnBoard(query));
-        jobPostingDTOs.addAll(remotive(query));
+        //jobPostingDTOs.addAll(remotive(query));
         return jobPostingDTOs;
     }
 
