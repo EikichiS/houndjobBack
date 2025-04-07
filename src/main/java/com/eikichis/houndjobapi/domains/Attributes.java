@@ -32,4 +32,13 @@ public class Attributes {
     @JsonProperty("published_at")
     private String creationDate;
 
+    @JsonProperty("min_salary")
+    private String min_salary;
+
+    @JsonProperty("max_salary")
+    private String max_salary;
+
+    @JsonProperty("categories")
+    private String category;
+
 }

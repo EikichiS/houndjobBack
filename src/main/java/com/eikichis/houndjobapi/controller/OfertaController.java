@@ -1,12 +1,10 @@
 package com.eikichis.houndjobapi.controller;
 
-import com.eikichis.houndjobapi.domains.JobPosting;
 import com.eikichis.houndjobapi.dto.Job;
 import com.eikichis.houndjobapi.dto.JobDTO;
 import com.eikichis.houndjobapi.dto.Portal;
-import com.eikichis.houndjobapi.services.GetonboardService;
+import com.eikichis.houndjobapi.services.PublicAPIService;
 import com.eikichis.houndjobapi.services.TrabajandoService;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,14 +19,20 @@ import java.util.List;
 public class OfertaController {
 
    @Autowired
-   private GetonboardService getonboardService;
+   private PublicAPIService getonboardService;
 
    @Autowired
    private TrabajandoService trabajandoService;
 
-   @GetMapping("/getonboard")
+   @GetMapping("/offers")
    public ResponseEntity<List<JobDTO>> getOferts(@RequestParam String jobs) throws Exception {
        List<JobDTO> ofertas = getonboardService.getOferts(jobs);
+       return ResponseEntity.ok(ofertas);
+   }
+
+   @GetMapping("/alloffers")
+   public ResponseEntity<List<JobDTO>> getAllOferts() throws Exception {
+       List<JobDTO> ofertas = getonboardService.getAllOferts();
        return ResponseEntity.ok(ofertas);
    }
 
