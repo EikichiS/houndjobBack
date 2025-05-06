@@ -36,7 +36,7 @@ public class PublicAPIServiceImpl implements PublicAPIService {
     @Override
     public List<JobDTO> getAllOferts() throws ApiException {
         List<JobDTO> jobDTOs = new ArrayList<>();
-        jobDTOs.addAll(getOnBoardClient.fetchJobs("all","100","4"));
+        jobDTOs.addAll(getOnBoardClient.fetchJobs("1","100","4"));
         jobDTOs.addAll(bneClient.fetchJobs("","80","4"));
         return jobDTOs;    }
 }
