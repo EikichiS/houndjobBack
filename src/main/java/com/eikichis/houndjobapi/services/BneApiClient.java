@@ -55,6 +55,7 @@ public class BneApiClient extends BaseApiClient {
             attributes.setCountry("Chile");
             attributes.setRegion(node.get("region").asText());
             attributes.setPortal("BNE.cl");
+            attributes.setLogo_url("https://www.bne.cl/data/img/logo-oferta?cod=" + node.get("codigo").asText());
             attributes.setCreation_date(node.get("fecha").asText(null));
 
             jobDTO.setAttributes(attributes);

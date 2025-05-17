@@ -33,6 +33,7 @@ public class JobMapperService {
             dto.getAttributes().setCategory(job.getAttributes().getCategory());
             dto.getAttributes().setPortal("Get On Board");
             dto.getAttributes().setCreation_date(job.getAttributes().getCreationDate());
+            dto.getAttributes().setLogo_url(job.getAttributes().getCompany().getData().getAttributes().getLogo());
             dto.setPublicUrl(job.getLinks().getPublicUrl());
             dtos.add(dto);
         }

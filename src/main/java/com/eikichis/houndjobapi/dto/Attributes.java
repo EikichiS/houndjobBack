@@ -13,4 +13,5 @@ public class Attributes {
     private String category;
     private String portal;
     private String creation_date;
+    private String logo_url;
 }
