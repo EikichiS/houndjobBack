@@ -1,9 +1,11 @@
-package com.eikichis.houndjobapi.services;
+package com.eikichis.houndjobapi.services.mapper;
 
 import com.eikichis.houndjobapi.domains.JobPosting;
 import com.eikichis.houndjobapi.domains.Remotive;
 import com.eikichis.houndjobapi.dto.JobDTO;
 import com.eikichis.houndjobapi.dto.Attributes;
+import com.eikichis.houndjobapi.exception.ApiException;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -69,5 +71,36 @@ public class JobMapperService {
             dtos.add(dto);
         }
         return dtos;
+    }
+    public List<JobDTO> mapToDtoTrabajo(JsonNode rootNode) throws ApiException {
+        if (!rootNode.isArray()) {
+            throw new ApiException("La respuesta de TrabajoConSentido no es un array esperado");
+        }
+
+        List<JobDTO> jobDTOs = new ArrayList<>();
+
+        for (JsonNode offerNode : rootNode) {
+            JobDTO jobDTO = new JobDTO();
+            jobDTO.setId(offerNode.get("id").asText());
+            jobDTO.setType("job");
+
+            Attributes attributes = new Attributes();
+            attributes.setTitle(offerNode.get("title").asText());
+            attributes.setCompany(offerNode.get("organization").get("name").asText());
+            attributes.setRegion(offerNode.get("city").asText());
+            attributes.setPortal("TrabajoConSentido");
+            attributes.setCreation_date(offerNode.get("createdAt").asText());
+
+            // Manejo de salario (ajusta según la estructura real de la API)
+            if (offerNode.has("salary")) {
+                JsonNode salaryNode = offerNode.get("salary");
+                attributes.setMinSalary(salaryNode.get("range").get(0).asText());
+                attributes.setMaxSalary(salaryNode.get("range").get(1).asText());
+            }
+            jobDTO.setAttributes(attributes);
+            jobDTOs.add(jobDTO);
+        }
+
+        return jobDTOs;
     }
 }

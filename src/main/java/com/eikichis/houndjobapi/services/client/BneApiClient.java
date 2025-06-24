@@ -1,4 +1,4 @@
-package com.eikichis.houndjobapi.services;
+package com.eikichis.houndjobapi.services.client;
 
 import com.eikichis.houndjobapi.dto.JobDTO;
 import com.eikichis.houndjobapi.dto.Attributes;

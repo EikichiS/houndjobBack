@@ -1,4 +1,4 @@
-package com.eikichis.houndjobapi.services;
+package com.eikichis.houndjobapi.services.client;
 
 import com.eikichis.houndjobapi.exception.ApiException;
 import com.fasterxml.jackson.databind.JsonNode;

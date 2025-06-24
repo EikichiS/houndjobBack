@@ -3,6 +3,11 @@ package com.eikichis.houndjobapi.services.Impl;
 import com.eikichis.houndjobapi.dto.JobDTO;
 import com.eikichis.houndjobapi.exception.ApiException;
 import com.eikichis.houndjobapi.services.*;
+import com.eikichis.houndjobapi.services.client.BneApiClient;
+import com.eikichis.houndjobapi.services.client.GetOnBoardApiClient;
+import com.eikichis.houndjobapi.services.client.RemotiveApiClient;
+import com.eikichis.houndjobapi.services.client.TrabajoConSentidoClient;
+import com.eikichis.houndjobapi.services.mapper.JobMapperService;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +20,18 @@ public class PublicAPIServiceImpl implements PublicAPIService {
     private final BneApiClient bneClient;
     private final JobMapperService jobMapperService;
 
+    private final TrabajoConSentidoClient trabajoConSentidoClient;
+
     public PublicAPIServiceImpl(GetOnBoardApiClient getOnBoardClient,
                                 RemotiveApiClient remotiveClient,
                                 BneApiClient bneClient,
-                                JobMapperService jobMapperService) {
+                                JobMapperService jobMapperService,
+                                TrabajoConSentidoClient trabajoConSentidoClient) {
         this.getOnBoardClient = getOnBoardClient;
         this.remotiveClient = remotiveClient;
         this.bneClient = bneClient;
         this.jobMapperService = jobMapperService;
+        this.trabajoConSentidoClient = trabajoConSentidoClient;
     }
 
     @Override
@@ -38,5 +47,7 @@ public class PublicAPIServiceImpl implements PublicAPIService {
         List<JobDTO> jobDTOs = new ArrayList<>();
         jobDTOs.addAll(getOnBoardClient.fetchJobs("1","100","4"));
         jobDTOs.addAll(bneClient.fetchJobs("","80","4"));
-        return jobDTOs;    }
+        jobDTOs.addAll(trabajoConSentidoClient.fetchJobs());
+        return jobDTOs;
+    }
 }

@@ -1,9 +1,9 @@
-package com.eikichis.houndjobapi.services;
+package com.eikichis.houndjobapi.services.client;
 
 import com.eikichis.houndjobapi.domains.Remotive;
 import com.eikichis.houndjobapi.dto.JobDTO;
 import com.eikichis.houndjobapi.exception.ApiException;
-import com.eikichis.houndjobapi.services.BaseApiClient;
+import com.eikichis.houndjobapi.services.mapper.JobMapperService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
