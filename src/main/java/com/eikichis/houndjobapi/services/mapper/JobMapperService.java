@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobMapperService {
@@ -29,7 +30,11 @@ public class JobMapperService {
             dto.setAttributes(new Attributes());
             dto.getAttributes().setTitle(job.getAttributes().getTitle());
             dto.getAttributes().setCompany(job.getAttributes().getCompany().getData().getAttributes().getName());
-            dto.getAttributes().setCountry(job.getAttributes().getCountries().get(0));
+            dto.getAttributes().setCountry(Optional.ofNullable(job.getAttributes().getCountries())
+                    .stream()
+                    .flatMap(List::stream)
+                    .findFirst()
+                    .orElse(null));
             dto.getAttributes().setMinSalary(job.getAttributes().getMin_salary());
             dto.getAttributes().setMaxSalary(job.getAttributes().getMax_salary());
             dto.getAttributes().setCategory(job.getAttributes().getCategory());
